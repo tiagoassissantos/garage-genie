@@ -1,0 +1,28 @@
+{
+    "name": "Elixir Phoenix Development",
+    "dockerFile": "Dockerfile",
+    "forwardPorts": [4000],
+    "postCreateCommand": "mix deps.get && mix ecto.setup",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "jakebecker.elixir-ls",
+                "phoenixframework.phoenix",
+                "bradlc.vscode-tailwindcss",
+                "mtxr.sqltools",
+                "mtxr.sqltools-driver-pg",
+                "eamodio.gitlens",
+                "ms-azuretools.vscode-docker",
+                "GitHub.copilot"
+            ],
+            "settings": {
+                "elixirLS.fetchDeps": false,
+                "editor.formatOnSave": true,
+                "editor.defaultFormatter": "jakebecker.elixir-ls",
+                "files.associations": {
+                    "*.heex": "phoenix-heex"
+                }
+            }
+        }
+    }
+}
