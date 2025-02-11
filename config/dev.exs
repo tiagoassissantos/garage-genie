@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :garage_genie, GarageGenie.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("POSTGRES_USER") || "postgres",
+  password: System.get_env("POSTGRES_PASSWORD") || "postgres",
   hostname: "localhost",
-  database: "garage_genie_dev",
+  database: System.get_env("POSTGRES_DB") || "garage_genie_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

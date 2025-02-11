@@ -6,23 +6,33 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "jakebecker.elixir-ls",
+                "JakeBecker.elixir-ls",
                 "phoenixframework.phoenix",
                 "bradlc.vscode-tailwindcss",
                 "mtxr.sqltools",
                 "mtxr.sqltools-driver-pg",
                 "eamodio.gitlens",
                 "ms-azuretools.vscode-docker",
-                "GitHub.copilot"
+                "GitHub.copilot",
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "adrianwilczynski.alpine-js-intellisense",
+                "stylelint.vscode-stylelint",
+                "pantajoe.vscode-elixir-credo",
+                "stkb.rewrap",
+                "samuel-pordeus.elixir-test"
             ],
             "settings": {
                 "elixirLS.fetchDeps": false,
                 "editor.formatOnSave": true,
-                "editor.defaultFormatter": "jakebecker.elixir-ls",
+                "editor.defaultFormatter": "JakeBecker.elixir-ls",
                 "files.associations": {
                     "*.heex": "phoenix-heex"
                 }
             }
         }
-    }
+    },
+    "runArgs": [
+        "--network=host"
+    ]
 }

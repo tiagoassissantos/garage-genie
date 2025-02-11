@@ -673,4 +673,29 @@ defmodule GarageGenieWeb.CoreComponents do
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
+
+  @doc """
+  Renders a basic landing page.
+
+  ## Examples
+
+      <.landing_page title="Welcome to Garage Genie">
+        <p>Your garage management solution.</p>
+      </.landing_page>
+  """
+  attr :title, :string, required: true
+  slot :inner_block, required: true
+
+  def landing_page(assigns) do
+    ~H"""
+    <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <header class="text-4xl font-bold text-gray-800 mb-4">
+        {@title}
+      </header>
+      <main class="text-lg text-gray-600">
+        {render_slot(@inner_block)}
+      </main>
+    </div>
+    """
+  end
 end
