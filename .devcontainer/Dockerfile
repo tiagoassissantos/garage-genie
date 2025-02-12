@@ -91,7 +91,7 @@ RUN asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git && \
     asdf install nodejs 22.14.0
 
 ENV ASDF_ERLANG_VERSION=27.2.2
-ENV ASDF_ELIXIR_VERSION=1.18.2
+ENV ASDF_ELIXIR_VERSION=1.18.2-otp-27
 ENV ASDF_NODEJS_VERSION=22.14.0
 ENV PATH="/home/developer/.asdf/shims:$PATH"
 
@@ -99,15 +99,15 @@ ENV PATH="/home/developer/.asdf/shims:$PATH"
 # The official install script can run non-interactively by setting RUNZSH and CHSH to "no".
 RUN RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-RUN echo "export ASDF_ERLANG_VERSION=27.2.2" >> ~/.zshrc && \
-    echo "export ASDF_ELIXIR_VERSION=1.18.2" >> ~/.zshrc && \
-    echo "export ASDF_NODEJS_VERSION=22.14.0" >> ~/.zshrc && \
-    echo "export PATH=/home/developer/.asdf/shims:$PATH" >> ~/.zshrc && \
-    source ~/.zshrc
+RUN echo "export ASDF_ERLANG_VERSION=27.2.2" >> /home/developer/.zshrc && \
+    echo "export ASDF_ELIXIR_VERSION=1.18.2-otp-27" >> /home/developer/.zshrc && \
+    echo "export ASDF_NODEJS_VERSION=22.14.0" >> /home/developer/.zshrc && \
+    echo "export PATH=/home/developer/.asdf/shims:$PATH" >> /home/developer/.zshrc && \
+    source /home/developer/.zshrc
 
 # Install Hex and Rebar using mix (provided by the installed Elixir)
-RUN mix local.hex --force && \
-    mix local.rebar --force
+RUN /home/developer/.asdf/shims/mix local.hex --force && \
+    /home/developer/.asdf/shims/mix local.rebar --force
 
 # (Optionally, you can customize the .zshrc or add plugins here)
 
