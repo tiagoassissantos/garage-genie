@@ -93,23 +93,23 @@ RUN asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git && \
 ENV ASDF_ERLANG_VERSION=27.2.2
 ENV ASDF_ELIXIR_VERSION=1.18.2
 ENV ASDF_NODEJS_VERSION=22.14.0
-ENV PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH"
-
-RUN echo "export ASDF_ERLANG_VERSION=27.2.2" >> ~/.zshrc && \
-    echo "export ASDF_ELIXIR_VERSION=1.18.2" >> ~/.zshrc && \
-    echo "export ASDF_NODEJS_VERSION=22.14.0" >> ~/.zshrc && \
-    echo "export PATH=/opt/asdf/bin:/opt/asdf/shims:$PATH" >> ~/.zshrc && \
-    source ~/.zshrc
-
-# Install Hex and Rebar using mix (provided by the installed Elixir)
-#RUN mix local.hex --force && \
-#    mix local.rebar --force
+ENV PATH="/home/developer/.asdf/shims:$PATH"
 
 # Install oh-my-zsh unattended.
 # The official install script can run non-interactively by setting RUNZSH and CHSH to "no".
 RUN RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+RUN echo "export ASDF_ERLANG_VERSION=27.2.2" >> ~/.zshrc && \
+    echo "export ASDF_ELIXIR_VERSION=1.18.2" >> ~/.zshrc && \
+    echo "export ASDF_NODEJS_VERSION=22.14.0" >> ~/.zshrc && \
+    echo "export PATH=/home/developer/.asdf/shims:$PATH" >> ~/.zshrc && \
+    source ~/.zshrc
+
+# Install Hex and Rebar using mix (provided by the installed Elixir)
+RUN mix local.hex --force && \
+    mix local.rebar --force
+
 # (Optionally, you can customize the .zshrc or add plugins here)
 
 # Switch back to root (or leave as developer if you want the container to run as that user)
-USER root
+#USER root
