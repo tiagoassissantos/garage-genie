@@ -43,6 +43,8 @@ RUN initdb -D /var/lib/postgres/data && \
     createdb garage_genie_dev && \
     pg_ctl -D /var/lib/postgres/data stop
 
+RUN pg_ctl start -D /var/lib/postgres/data
+
 # Switch back to root for the remaining installations.
 USER root
 
@@ -63,7 +65,7 @@ RUN git clone https://aur.archlinux.org/asdf-vm.git /opt/asdf-vm && \
     chown -R developer:developer /opt/asdf-vm
 
 # Switch to the "developer" user.
-USER developer
+USER developerde-paraz
 WORKDIR /home/developer
 
 # Set the mix environment
