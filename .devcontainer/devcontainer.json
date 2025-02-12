@@ -1,7 +1,10 @@
 {
     "name": "Elixir Phoenix Development",
     "dockerFile": "Dockerfile",
-    "forwardPorts": [4000],
+    "remoteUser": "developer",
+    "forwardPorts": [
+        4000
+    ],
     "postCreateCommand": "mix deps.get && mix ecto.setup",
     "customizations": {
         "vscode": {
