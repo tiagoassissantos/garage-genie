@@ -6,6 +6,7 @@
         4000
     ],
     "postCreateCommand": "mix deps.get && mix ecto.setup",
+    "postStartCommand": "sudo su - postgres -c \"pg_ctl start -D /var/lib/postgres/data\"",
     "customizations": {
         "vscode": {
             "extensions": [

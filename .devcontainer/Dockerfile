@@ -18,7 +18,8 @@ RUN pacman -Syu --noconfirm && \
       libxml2 \
       zlib \
       go \
-      unzip
+      unzip \
+      vim
 
 # Set environment variables for PostgreSQL.
 ENV POSTGRES_USER=postgres \
@@ -43,8 +44,6 @@ RUN initdb -D /var/lib/postgres/data && \
     createdb garage_genie_dev && \
     pg_ctl -D /var/lib/postgres/data stop
 
-RUN pg_ctl start -D /var/lib/postgres/data
-
 # Switch back to root for the remaining installations.
 USER root
 
@@ -65,7 +64,7 @@ RUN git clone https://aur.archlinux.org/asdf-vm.git /opt/asdf-vm && \
     chown -R developer:developer /opt/asdf-vm
 
 # Switch to the "developer" user.
-USER developerde-paraz
+USER developer
 WORKDIR /home/developer
 
 # Set the mix environment
@@ -80,7 +79,6 @@ RUN cd /opt/asdf-vm && \
 # Install asdf version manager (version 0.11.3)
 #RUN git clone https://github.com/asdf-vm/asdf.git /opt/asdf --branch v0.11.3
 ENV ASDF_DIR=/opt/asdf-vm
-ENV PATH="$ASDF_DIR/bin:$ASDF_DIR/shims:$PATH"
 # Set kerl options to avoid building docs
 ENV KERL_CONFIGURE_OPTIONS="--disable-debug --without-docs"
 
@@ -112,6 +110,7 @@ RUN /home/developer/.asdf/shims/mix local.hex --force && \
     /home/developer/.asdf/shims/mix local.rebar --force
 
 # (Optionally, you can customize the .zshrc or add plugins here)
+RUN sed -i.bak 's/plugins=(git)/plugins=(archlinux asdf docker git mix postgres)/' /home/developer/.zshrc
 
 # Switch back to root (or leave as developer if you want the container to run as that user)
 #USER root
